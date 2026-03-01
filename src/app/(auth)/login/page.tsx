@@ -1,19 +1,20 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react'
+import { Eye, EyeOff, ArrowRight } from 'lucide-react'
 import { loginSchema } from '@/lib/validation'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
+import { Spinner } from '@/components/ui'
 import { z } from 'zod'
 
 type LoginForm = z.infer<typeof loginSchema>
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirect = searchParams.get('redirect') || '/dashboard'
@@ -56,6 +57,78 @@ export default function LoginPage() {
     }
   }
 
+  return (
+    <>
+      {error && (
+        <div className="mb-6 p-4 bg-error/10 border border-error/20 rounded-lg text-error text-sm">
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <div>
+          <Input
+            label="Email Address"
+            type="email"
+            placeholder="you@example.com"
+            error={errors.email?.message}
+            {...register('email')}
+          />
+        </div>
+
+        <div>
+          <div className="relative">
+            <Input
+              label="Password"
+              type={showPassword ? 'text' : 'password'}
+              placeholder="••••••••"
+              error={errors.password?.message}
+              {...register('password')}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-[38px] text-text-muted hover:text-text-primary transition-colors"
+            >
+              {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary"
+            />
+            <span className="ml-2 text-sm text-text-secondary">Remember me</span>
+          </label>
+          <Link href="/forgot-password" className="text-sm text-primary hover:text-primary-600">
+            Forgot password?
+          </Link>
+        </div>
+
+        <Button
+          type="submit"
+          fullWidth
+          loading={loading}
+          rightIcon={<ArrowRight className="w-5 h-5" />}
+        >
+          Sign In
+        </Button>
+      </form>
+
+      <p className="mt-8 text-center text-text-secondary">
+        Don&apos;t have an account?{' '}
+        <Link href="/signup" className="text-primary font-medium hover:text-primary-600">
+          Create Account
+        </Link>
+      </p>
+    </>
+  )
+}
+
+export default function LoginPage() {
   return (
     <div className="min-h-screen flex">
       <div className="hidden lg:flex lg:w-1/2 gradient-hero relative">
@@ -118,71 +191,9 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {error && (
-            <div className="mb-6 p-4 bg-error/10 border border-error/20 rounded-lg text-error text-sm">
-              {error}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            <div>
-              <Input
-                label="Email Address"
-                type="email"
-                placeholder="you@example.com"
-                error={errors.email?.message}
-                {...register('email')}
-              />
-            </div>
-
-            <div>
-              <div className="relative">
-                <Input
-                  label="Password"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="••••••••"
-                  error={errors.password?.message}
-                  {...register('password')}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-[38px] text-text-muted hover:text-text-primary transition-colors"
-                >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                </button>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary"
-                />
-                <span className="ml-2 text-sm text-text-secondary">Remember me</span>
-              </label>
-              <Link href="/forgot-password" className="text-sm text-primary hover:text-primary-600">
-                Forgot password?
-              </Link>
-            </div>
-
-            <Button
-              type="submit"
-              fullWidth
-              loading={loading}
-              rightIcon={<ArrowRight className="w-5 h-5" />}
-            >
-              Sign In
-            </Button>
-          </form>
-
-          <p className="mt-8 text-center text-text-secondary">
-            Don't have an account?{' '}
-            <Link href="/signup" className="text-primary font-medium hover:text-primary-600">
-              Create Account
-            </Link>
-          </p>
+          <Suspense fallback={<div className="flex justify-center py-10"><Spinner size="lg" /></div>}>
+            <LoginForm />
+          </Suspense>
         </div>
       </div>
     </div>

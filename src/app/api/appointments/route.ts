@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     
     if (session?.user.role === 'user') {
       appointments = appointments.filter(apt => apt.userId === session.user.id)
-    } else if (userId && session?.user.role !== 'user') {
+    } else if (userId && session && (session.user.role === 'admin' || session.user.role === 'editor')) {
       appointments = appointments.filter(apt => apt.userId === userId)
     }
     

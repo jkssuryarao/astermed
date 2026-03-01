@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { FileEdit, Image, Save } from 'lucide-react'
+import { FileEdit, Image as ImageIcon, Save } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
@@ -97,7 +97,7 @@ export default function CMSPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Image className="w-5 h-5" />
+              <ImageIcon className="w-5 h-5" />
               Image Gallery
             </CardTitle>
             <CardDescription>Manage website images</CardDescription>
@@ -109,7 +109,7 @@ export default function CMSPage() {
                   key={i}
                   className="aspect-square rounded-lg bg-muted flex items-center justify-center cursor-pointer hover:bg-muted/80 transition-colors"
                 >
-                  <Image className="w-8 h-8 text-text-muted" />
+                  <ImageIcon className="w-8 h-8 text-text-muted" />
                 </div>
               ))}
             </div>

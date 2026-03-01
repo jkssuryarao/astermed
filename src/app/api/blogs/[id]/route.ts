@@ -87,14 +87,14 @@ export async function PATCH(
     }
     
     const now = getCurrentDateTime()
-    const updates = validation.data
+    const updates: Partial<Blog> = validation.data
     
     if (updates.title && updates.title !== blog.title) {
       updates.slug = generateSlug(updates.title)
     }
     
     if (updates.status === 'published' && blog.status !== 'published') {
-      (updates as any).publishedAt = now
+      updates.publishedAt = now
     }
     
     const updatedBlog: Blog = {
