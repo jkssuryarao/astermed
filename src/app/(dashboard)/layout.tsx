@@ -24,6 +24,7 @@ import {
   Bot
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import Logo from '@/components/brand/Logo'
 
 interface DashboardLayoutProps {
   children: ReactNode
@@ -137,12 +138,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         )}
       >
         <div className="flex items-center justify-between p-4 border-b">
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
-              <span className="text-white font-bold">A</span>
-            </div>
-            <span className="font-bold text-primary">AsterMed</span>
-          </Link>
+          <Logo variant="compact" size="sm" href="/" />
           <button
             className="lg:hidden p-2 rounded-lg hover:bg-muted"
             onClick={() => setSidebarOpen(false)}

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
+import { BRAND } from '@/lib/brand'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -17,14 +18,14 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: 'AsterMed Healthcare - Premium Healthcare Services',
-    template: '%s | AsterMed Healthcare',
+    default: `${BRAND.title} - ${BRAND.tagline}`,
+    template: `%s | ${BRAND.title}`,
   },
-  description: 'Experience premium healthcare services at AsterMed Healthcare. Book appointments, consult with expert doctors, and get personalized care.',
-  keywords: ['healthcare', 'clinic', 'doctor', 'appointment', 'medical', 'hyderabad', 'astermed'],
-  authors: [{ name: 'AsterMed Healthcare' }],
-  creator: 'AsterMed Healthcare',
-  publisher: 'AsterMed Healthcare',
+  description: `${BRAND.tagline}. Experience premium diagnostic and health services at ${BRAND.title}. Book appointments, consult with expert doctors, and get personalized care.`,
+  keywords: ['healthcare', 'clinic', 'doctor', 'appointment', 'medical', 'hyderabad', 'astermed', 'diagnostic'],
+  authors: [{ name: BRAND.title }],
+  creator: BRAND.title,
+  publisher: BRAND.title,
   formatDetection: {
     email: false,
     address: false,
@@ -32,17 +33,26 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
   openGraph: {
-    title: 'AsterMed Healthcare - Premium Healthcare Services',
-    description: 'Experience premium healthcare services at AsterMed Healthcare.',
+    title: `${BRAND.title} - ${BRAND.tagline}`,
+    description: `${BRAND.tagline}. Experience premium diagnostic and health services at ${BRAND.title}.`,
     url: '/',
-    siteName: 'AsterMed Healthcare',
+    siteName: BRAND.title,
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: '/images/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: BRAND.title,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AsterMed Healthcare',
-    description: 'Premium Healthcare Services in Hyderabad',
+    title: BRAND.title,
+    description: `${BRAND.tagline} - Diagnostic and Health services in Hyderabad`,
+    images: ['/images/og-image.png'],
   },
   robots: {
     index: true,

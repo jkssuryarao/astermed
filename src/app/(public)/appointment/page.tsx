@@ -34,6 +34,14 @@ const guestSchema = z.object({
 
 type AppointmentForm = z.infer<typeof appointmentSchema>
 
+const STEP_LABELS = [
+  'Choose Department',
+  'Select Doctor',
+  'Choose Date & Time',
+  'Patient Details',
+  'Confirm Appointment',
+]
+
 export default function AppointmentPage() {
   const router = useRouter()
   const [step, setStep] = useState(1)
@@ -160,28 +168,31 @@ export default function AppointmentPage() {
             </p>
           </div>
 
-          <div className="flex justify-center mb-8">
-            <div className="flex items-center space-x-4">
-              {[1, 2, 3, 4].map((s) => (
-                <div key={s} className="flex items-center">
-                  <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${
-                      step >= s
-                        ? 'bg-primary text-white'
-                        : 'bg-gray-200 text-text-muted'
-                    }`}
-                  >
-                    {step > s ? <CheckCircle className="w-5 h-5" /> : s}
+          <div className="mb-8 overflow-x-auto">
+            <div className="flex items-center justify-center min-w-max gap-1 sm:gap-2 px-4">
+              {STEP_LABELS.map((label, i) => {
+                const stepNum = i + 1
+                const activeStep = step >= stepNum || (step === 4 && stepNum <= 4)
+                return (
+                  <div key={label} className="flex items-center">
+                    <div className="flex flex-col items-center">
+                      <div
+                        className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold transition-all ${
+                          activeStep ? 'bg-secondary text-white' : 'bg-gray-200 text-text-muted'
+                        }`}
+                      >
+                        {step > stepNum ? <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" /> : stepNum}
+                      </div>
+                      <span className="text-[10px] sm:text-xs text-text-muted mt-1 max-w-[72px] sm:max-w-none text-center hidden sm:block">
+                        {label}
+                      </span>
+                    </div>
+                    {i < STEP_LABELS.length - 1 && (
+                      <div className={`w-4 sm:w-8 h-0.5 mx-1 ${step > stepNum ? 'bg-secondary' : 'bg-gray-200'}`} />
+                    )}
                   </div>
-                  {s < 4 && (
-                    <div
-                      className={`w-12 h-1 mx-2 transition-all ${
-                        step > s ? 'bg-primary' : 'bg-gray-200'
-                      }`}
-                    />
-                  )}
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
 

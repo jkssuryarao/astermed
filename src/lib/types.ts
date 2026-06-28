@@ -121,6 +121,85 @@ export interface Service {
   icon: string
 }
 
+export interface DoctorProfile {
+  id: string
+  name: string
+  qualifications: string
+  specialty: string
+  experienceYears: string
+  availability: string
+  bio: string
+  photoUrl: string
+  sortOrder: string
+  status: 'active' | 'inactive' | string
+}
+
+export interface BoardMember {
+  id: string
+  name: string
+  designation: string
+  qualifications: string
+  experienceYears: string
+  photoUrl: string
+  sortOrder: string
+  status: 'active' | 'inactive' | string
+}
+
+export interface Activity {
+  id: string
+  title: string
+  location: string
+  date: string
+  imageUrl: string
+  description: string
+  sortOrder: string
+  status: 'active' | 'inactive' | string
+}
+
+export interface Department {
+  id: string
+  slug: string
+  name: string
+  color: string
+  bullets: string
+  ctaLabel: string
+  ctaHref: string
+  sortOrder: string
+}
+
+export interface ServiceTiming {
+  id: string
+  department: string
+  weekdayLabel: string
+  weekdayHours: string
+  sundayHours: string
+  sortOrder: string
+}
+
+export interface SiteSettings {
+  clinic_name: string
+  clinic_email: string
+  clinic_phone: string
+  clinic_whatsapp: string
+  clinic_address: string
+  clinic_map_url: string
+  clinic_map_embed: string
+  social_facebook: string
+  social_instagram: string
+  social_youtube: string
+  social_linkedin: string
+  facebook_enabled: string
+  instagram_enabled: string
+  youtube_enabled: string
+  linkedin_enabled: string
+  hero_image_url: string
+  walk_in_text: string
+  copyright_text: string
+  working_hours_start: string
+  working_hours_end: string
+}
+
+/** @deprecated Use DoctorProfile */
 export interface Doctor {
   id: string
   name: string

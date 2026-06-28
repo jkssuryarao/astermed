@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import { format, addMonths, isAfter, isBefore, startOfDay, parseISO } from 'date-fns'
+import { BRAND } from '@/lib/brand'
 
 export function generateId(): string {
   return uuidv4()
@@ -123,9 +124,9 @@ export function generateGoogleCalendarUrl(appointment: {
   
   const formatGoogleDate = (d: Date) => d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
   
-  const title = encodeURIComponent(`AsterMed Appointment - ${service}`)
-  const details = encodeURIComponent(`Service: ${service}${doctor ? `\nDoctor: ${doctor}` : ''}\n\nAsterMed Healthcare\nVinayaka Nagar, Hafeezpet, Hyderabad`)
-  const location = encodeURIComponent('AsterMed Healthcare, Vinayaka Nagar, Hafeezpet, Hyderabad, Telangana 500049')
+  const title = encodeURIComponent(`${BRAND.shortName} Appointment - ${service}`)
+  const details = encodeURIComponent(`Service: ${service}${doctor ? `\nDoctor: ${doctor}` : ''}\n\n${BRAND.title}\nVinayaka Nagar, Hafeezpet, Hyderabad`)
+  const location = encodeURIComponent(`${BRAND.title}, Vinayaka Nagar, Hafeezpet, Hyderabad, Telangana 500049`)
   const dates = `${formatGoogleDate(startDate)}/${formatGoogleDate(endDate)}`
   
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`

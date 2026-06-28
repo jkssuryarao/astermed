@@ -8,6 +8,7 @@ import Button from '@/components/ui/Button'
 import { formatDate } from '@/lib/utils'
 import { getSheetData, parseSheetData, SHEETS, SCHEMAS } from '@/lib/google-sheets'
 import { Blog } from '@/lib/types'
+import { BRAND } from '@/lib/brand'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -156,7 +157,7 @@ export default async function BlogPostPage({ params }: Props) {
                     </div>
                     <div>
                       <p className="font-semibold text-text-primary">{blog.author}</p>
-                      <p className="text-sm text-text-muted">AsterMed Healthcare</p>
+                      <p className="text-sm text-text-muted">{BRAND.title}</p>
                     </div>
                   </div>
                   <div className="flex gap-2">

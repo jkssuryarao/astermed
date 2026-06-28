@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from 'react'
 import { MessageCircle, X, Send, Loader2, Calendar, Phone } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Button from '@/components/ui/Button'
+import Logo from '@/components/brand/Logo'
+import { BRAND } from '@/lib/brand'
 
 interface ChatMessage {
   id: string
@@ -29,7 +31,7 @@ export default function Chatbot({ user }: ChatbotProps) {
     {
       id: '1',
       role: 'assistant',
-      content: "Hello! Welcome to AsterMed Healthcare. How can I assist you today?",
+      content: `Hello! Welcome to ${BRAND.title}. How can I assist you today?`,
       timestamp: new Date(),
     },
   ])
@@ -179,11 +181,9 @@ export default function Chatbot({ user }: ChatbotProps) {
       >
         <div className="gradient-primary p-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-              <MessageCircle className="w-5 h-5 text-white" />
-            </div>
+            <Logo variant="icon" size="sm" className="[&>div:first-child]:bg-white/20" />
             <div>
-              <h3 className="text-white font-semibold">AsterMed Assistant</h3>
+              <h3 className="text-white font-semibold">{BRAND.shortName} Assistant</h3>
               <p className="text-white/70 text-xs">Online | Typically replies instantly</p>
             </div>
           </div>

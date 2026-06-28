@@ -7,13 +7,14 @@ import Button from '@/components/ui/Button'
 import Select from '@/components/ui/Select'
 import Input from '@/components/ui/Input'
 import Textarea from '@/components/ui/Textarea'
+import { BRAND } from '@/lib/brand'
 
 export default function ChatbotSettings() {
   const [settings, setSettings] = useState({
     chatbot_enabled: 'true',
     chatbot_mode: 'nlp',
     whatsapp_number: '',
-    greeting_message: "Hello! Welcome to AsterMed Healthcare. How can I assist you today?",
+    greeting_message: `Hello! Welcome to ${BRAND.title}. How can I assist you today?`,
   })
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -241,7 +242,7 @@ export default function ChatbotSettings() {
                     <Bot className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-medium text-text-primary">AsterMed Assistant</p>
+                    <p className="font-medium text-text-primary">{BRAND.shortName} Assistant</p>
                     <p className="text-xs text-text-muted">
                       {settings.chatbot_enabled === 'true' ? 'Online' : 'Offline'}
                     </p>

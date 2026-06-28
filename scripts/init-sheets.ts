@@ -52,10 +52,26 @@ const SHEETS_CONFIG: Record<string, string[]> = {
   content: [
     'id', 'page', 'section', 'key', 'value', 'type', 'updatedAt', 'updatedBy'
   ],
+  doctors: [
+    'id', 'name', 'qualifications', 'specialty', 'experienceYears', 'availability',
+    'bio', 'photoUrl', 'sortOrder', 'status'
+  ],
+  board_members: [
+    'id', 'name', 'designation', 'qualifications', 'experienceYears', 'photoUrl', 'sortOrder', 'status'
+  ],
+  activities: [
+    'id', 'title', 'location', 'date', 'imageUrl', 'description', 'sortOrder', 'status'
+  ],
+  departments: [
+    'id', 'slug', 'name', 'color', 'bullets', 'ctaLabel', 'ctaHref', 'sortOrder'
+  ],
+  service_timings: [
+    'id', 'department', 'weekdayLabel', 'weekdayHours', 'sundayHours', 'sortOrder'
+  ],
 }
 
 const DEFAULT_SETTINGS = [
-  { key: 'clinic_name', value: 'AsterMed Healthcare', description: 'Clinic display name' },
+  { key: 'clinic_name', value: 'AsterMed diagnostic and Health services', description: 'Clinic display name' },
   { key: 'clinic_email', value: 'contact@astermedhealthcare.com', description: 'Clinic contact email' },
   { key: 'clinic_phone', value: '093816 59308', description: 'Clinic contact phone' },
   { key: 'clinic_address', value: 'Vinayaka Nagar, Hafeezpet, Hyderabad, Telangana 500049', description: 'Clinic address' },
@@ -75,7 +91,102 @@ const DEFAULT_SETTINGS = [
   { key: 'working_hours_end', value: '18:00', description: 'Clinic closing time' },
   { key: 'lunch_break_start', value: '13:00', description: 'Lunch break start' },
   { key: 'lunch_break_end', value: '14:00', description: 'Lunch break end' },
+  { key: 'clinic_whatsapp', value: '093816 59308', description: 'WhatsApp contact number' },
+  { key: 'clinic_map_url', value: 'https://maps.google.com/?q=Hafeezpet+Hyderabad', description: 'Google Maps directions URL' },
+  { key: 'clinic_map_embed', value: '', description: 'Google Maps embed URL for footer' },
+  { key: 'hero_image_url', value: '', description: 'Hero section background image URL' },
+  { key: 'walk_in_text', value: 'Walk-in Available', description: 'Walk-in availability text' },
+  { key: 'copyright_text', value: 'AsterMed diagnostic and Health services. All rights reserved.', description: 'Footer copyright text' },
 ]
+
+const DEFAULT_CONTENT = [
+  ['hero-title', 'home', 'hero', 'title', 'AsterMed diagnostic and Health services', 'text'],
+  ['hero-tagline', 'home', 'hero', 'tagline', 'Complete care. Trusted always.', 'text'],
+  ['hero-subtitle', 'home', 'hero', 'subtitle', 'Precision Trust Care', 'text'],
+  ['hero-values', 'home', 'hero', 'values', JSON.stringify([
+    { label: 'Expert Doctors', icon: 'stethoscope' },
+    { label: 'Advanced Diagnostics', icon: 'microscope' },
+    { label: 'Accurate Reports', icon: 'file-check' },
+    { label: 'Patient First Care', icon: 'heart' },
+  ]), 'json'],
+  ['timings-values', 'home', 'timings', 'values', JSON.stringify([
+    { label: 'Accurate Results', icon: 'check-circle' },
+    { label: 'Hygienic Environment', icon: 'shield' },
+    { label: 'Affordable Care', icon: 'wallet' },
+    { label: 'Trained Professionals', icon: 'users' },
+  ]), 'json'],
+  ['about-text', 'home', 'about', 'text', 'AsterMed diagnostic and Health services is committed to providing quality healthcare with a patient-first approach.', 'text'],
+  ['about-values', 'home', 'about', 'values', JSON.stringify([
+    { label: 'Patient First Approach', icon: 'heart' },
+    { label: 'Quality & Accuracy', icon: 'award' },
+    { label: 'Advanced Technology', icon: 'cpu' },
+    { label: 'Affordable Healthcare', icon: 'wallet' },
+  ]), 'json'],
+  ['journey-milestones', 'home', 'journey', 'milestones', JSON.stringify([
+    { year: '2020', text: 'Clinic Started' },
+    { year: '2021', text: 'Lab Services Launched' },
+    { year: '2022', text: 'Vaccination Center Opened' },
+    { year: '2023', text: '10,000+ Patients Served' },
+    { year: '2024', text: 'Expanded Diagnostic Services' },
+  ]), 'json'],
+  ['lab-popular-tests', 'home', 'lab', 'popular_tests', JSON.stringify(['CBC', 'HbA1c', 'Thyroid Profile', 'Lipid Profile', 'Liver Function', 'Kidney Function']), 'json'],
+  ['lab-process-steps', 'home', 'lab', 'process_steps', JSON.stringify([
+    { label: 'Choose Date', icon: 'calendar' },
+    { label: 'Home Collection', icon: 'home' },
+    { label: 'Secure Payment', icon: 'credit-card' },
+    { label: 'Digital Reports', icon: 'file-text' },
+  ]), 'json'],
+  ['lab-coming-soon', 'lab-tests', 'main', 'message', 'Online lab test booking is coming soon. Please contact us to book your tests.', 'text'],
+]
+
+const DEFAULT_DEPARTMENTS = [
+  ['dept-clinic', 'clinic', 'Clinic', 'secondary', JSON.stringify(['General Consultation', 'Chronic Disease Management', 'Preventive Health Checkups', 'Minor Procedures', 'Health Counseling']), 'Learn More', '/services#clinic', '1'],
+  ['dept-laboratory', 'laboratory', 'Laboratory', 'primary', JSON.stringify(['Accurate & Advanced Testing', 'Home Sample Collection', 'Fast Report Turnaround', 'Wide Test Menu', 'Quality Assured Results']), 'Book Lab Test', '/lab-tests', '2'],
+  ['dept-vaccines', 'vaccines', 'Vaccines', 'purple', JSON.stringify(['Child Vaccinations', 'Adult Vaccinations', 'Travel Vaccines', 'Flu Vaccines', 'Immunization Records']), 'Book Vaccine', '/appointment?service=vaccines', '3'],
+]
+
+const DEFAULT_SERVICE_TIMINGS = [
+  ['timing-clinic', 'Clinic', 'Monday to Saturday', '9:00 AM – 6:00 PM', 'Closed', '1'],
+  ['timing-laboratory', 'Laboratory', 'Monday to Saturday', '7:00 AM – 8:00 PM', '8:00 AM – 2:00 PM', '2'],
+  ['timing-vaccines', 'Vaccines', 'Monday to Saturday', '9:00 AM – 6:00 PM', 'Closed', '3'],
+]
+
+async function seedContentRows(
+  sheetName: string,
+  _columns: string[],
+  rows: string[][],
+  getKey: (row: string[]) => string,
+  withTimestamps = false
+) {
+  const sheets = await getGoogleSheetsClient()
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId: SHEET_ID,
+    range: `${sheetName}!A:Z`,
+  })
+  const data = response.data.values || []
+  const existingKeys = data.slice(1).map((row: string[]) => getKey(row))
+  const now = new Date().toISOString()
+  const toCreate: string[][] = []
+
+  for (const row of rows) {
+    if (!existingKeys.includes(getKey(row))) {
+      toCreate.push(withTimestamps ? [...row, now, 'system'] : row)
+    }
+  }
+
+  if (toCreate.length > 0) {
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: SHEET_ID,
+      range: `${sheetName}!A:Z`,
+      valueInputOption: 'RAW',
+      insertDataOption: 'INSERT_ROWS',
+      requestBody: { values: toCreate },
+    })
+    console.log(`   ✅ Created ${toCreate.length} default rows in ${sheetName}`)
+  } else {
+    console.log(`   ℹ️  All default rows already exist in ${sheetName}`)
+  }
+}
 
 async function initializeSheets() {
   console.log('🚀 Starting Google Sheets initialization...\n')
@@ -276,6 +387,15 @@ async function initializeSheets() {
   } else {
     console.log('   ℹ️  All default settings already exist')
   }
+
+  console.log('\n📄 Initializing default content...')
+  await seedContentRows('content', ['id', 'page', 'section', 'key', 'value', 'type'], DEFAULT_CONTENT, (row) => row[0], true)
+
+  console.log('\n🏥 Initializing departments...')
+  await seedContentRows('departments', ['id', 'slug', 'name', 'color', 'bullets', 'ctaLabel', 'ctaHref', 'sortOrder'], DEFAULT_DEPARTMENTS, (row) => row[0], false)
+
+  console.log('\n🕐 Initializing service timings...')
+  await seedContentRows('service_timings', ['id', 'department', 'weekdayLabel', 'weekdayHours', 'sundayHours', 'sortOrder'], DEFAULT_SERVICE_TIMINGS, (row) => row[0], false)
   
   console.log('\n' + '═'.repeat(50))
   console.log('✅ Google Sheets initialization complete!')

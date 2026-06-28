@@ -6,10 +6,11 @@ import Badge from '@/components/ui/Badge'
 import { formatDate, truncateText } from '@/lib/utils'
 import { getSheetData, parseSheetData, SHEETS, SCHEMAS } from '@/lib/google-sheets'
 import { Blog } from '@/lib/types'
+import { BRAND } from '@/lib/brand'
 
 export const metadata: Metadata = {
   title: 'Health Blog',
-  description: 'Stay informed with the latest health tips, medical insights, and wellness advice from AsterMed Healthcare experts.',
+  description: `Stay informed with the latest health tips, medical insights, and wellness advice from ${BRAND.title} experts.`,
 }
 
 async function getBlogs(): Promise<Blog[]> {

@@ -1,7 +1,7 @@
 {
-  "name": "AsterMed Healthcare",
-  "short_name": "AsterMed",
-  "description": "Premium Healthcare Services - Book appointments, consult doctors, and manage your health",
+  "name": "AsterMed diagnostic and Health services",
+  "short_name": "AsterMed diagnostic and Health services",
+  "description": "Precision Trust Care - Book appointments, consult doctors, and manage your health",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FFFFFF",

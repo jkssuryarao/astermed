@@ -76,6 +76,13 @@ const config: Config = {
           DEFAULT: '#FF9800',
           50: '#FFF3E0',
         },
+        purple: {
+          DEFAULT: '#7C3AED',
+          50: '#F5F3FF',
+          100: '#EDE9FE',
+          500: '#7C3AED',
+          600: '#6D28D9',
+        },
       },
       fontFamily: {
         heading: ['Inter', 'Poppins', 'sans-serif'],

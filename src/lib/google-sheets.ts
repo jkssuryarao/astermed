@@ -28,6 +28,11 @@ export const SHEETS = {
   ANALYTICS: 'analytics',
   SETTINGS: 'settings',
   CONTENT: 'content',
+  DOCTORS: 'doctors',
+  BOARD_MEMBERS: 'board_members',
+  ACTIVITIES: 'activities',
+  DEPARTMENTS: 'departments',
+  SERVICE_TIMINGS: 'service_timings',
 } as const
 
 export const SCHEMAS = {
@@ -59,6 +64,22 @@ export const SCHEMAS = {
   ],
   [SHEETS.CONTENT]: [
     'id', 'page', 'section', 'key', 'value', 'type', 'updatedAt', 'updatedBy'
+  ],
+  [SHEETS.DOCTORS]: [
+    'id', 'name', 'qualifications', 'specialty', 'experienceYears', 'availability',
+    'bio', 'photoUrl', 'sortOrder', 'status'
+  ],
+  [SHEETS.BOARD_MEMBERS]: [
+    'id', 'name', 'designation', 'qualifications', 'experienceYears', 'photoUrl', 'sortOrder', 'status'
+  ],
+  [SHEETS.ACTIVITIES]: [
+    'id', 'title', 'location', 'date', 'imageUrl', 'description', 'sortOrder', 'status'
+  ],
+  [SHEETS.DEPARTMENTS]: [
+    'id', 'slug', 'name', 'color', 'bullets', 'ctaLabel', 'ctaHref', 'sortOrder'
+  ],
+  [SHEETS.SERVICE_TIMINGS]: [
+    'id', 'department', 'weekdayLabel', 'weekdayHours', 'sundayHours', 'sortOrder'
   ],
 }
 

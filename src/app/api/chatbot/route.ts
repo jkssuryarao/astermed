@@ -2,10 +2,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/auth'
 import { appendToSheet, getSheetData, parseSheetData, SHEETS, SCHEMAS } from '@/lib/google-sheets'
 import { generateId, getCurrentDateTime, getTimeSlots, formatTime } from '@/lib/utils'
+import { BRAND } from '@/lib/brand'
 import { Appointment, Setting } from '@/lib/types'
 
 const PREDEFINED_RESPONSES: Record<string, string> = {
-  greeting: "Hello! Welcome to AsterMed Healthcare. How can I assist you today?",
+  greeting: `Hello! Welcome to ${BRAND.title}. How can I assist you today?`,
   services: "We offer a wide range of healthcare services including General Consultation, Pediatrics, Gynecology, Cardiology, Orthopedics, and more. Would you like to book an appointment?",
   timing: "Our clinic is open Monday to Saturday, 9:00 AM to 6:00 PM. We have a lunch break from 1:00 PM to 2:00 PM.",
   location: "We are located at Vinayaka Nagar, Hafeezpet, Hyderabad, Telangana 500049. You can reach us at 093816 59308.",
